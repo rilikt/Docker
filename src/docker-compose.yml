@@ -1,6 +1,27 @@
+
 services:
   nginx:
     build: requirements/nginx/.
     container_name: nginx
+    depends_on:
+      - wordpress
     ports:
       - "80:80"
+    volumes:
+      - ./web:/var/www/html
+    networks:
+      - site-network
+
+  wordpress:
+    build: requirements/wordpress/.
+    container_name: wordpress
+    ports:
+      - "9000:9000" 
+    volumes:
+      - ./web:/var/www/html
+    networks:
+      - site-network
+
+networks:
+  site-network:
+    driver: bridge
