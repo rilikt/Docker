@@ -1,7 +1,9 @@
+version: "3.8"
 
 services:
 
   mariadb:
+    # env_file: "./.env"
     build: requirements/mariadb/.
     container_name: mariadb
     environment:
@@ -17,6 +19,7 @@ services:
       - site-network
 
   wordpress:
+    # env_file: "./.env"
     build: requirements/wordpress/.
     container_name: wordpress
     depends_on:
@@ -27,13 +30,14 @@ services:
       WORDPRESS_DB_PASSWORD: 1234
       WORDPRESS_DB_NAME: wordpress
     ports:
-      - "9000:9000" 
+      - "9000:9000"
     volumes:
       - ./web:/var/www/html
     networks:
       - site-network
 
   nginx:
+    # env_file: "./.env"
     build: requirements/nginx/.
     container_name: nginx
     depends_on:
@@ -45,6 +49,13 @@ services:
     networks:
       - site-network
 
+# volumes:
+#   db:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       device: /home/timschmi/Desktop/Inception/src/db
+#       o: bind
 
 networks:
   site-network:
