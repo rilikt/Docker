@@ -17,6 +17,7 @@ services:
       - ./db:/var/lib/mysql
     networks:
       - site-network
+    restart: always
 
   wordpress:
     # env_file: "./.env"
@@ -35,6 +36,7 @@ services:
       - ./web:/var/www/html
     networks:
       - site-network
+    restart: always
 
   nginx:
     # env_file: "./.env"
@@ -48,14 +50,15 @@ services:
       - ./web:/var/www/html
     networks:
       - site-network
+    restart: always
 
-# volumes:
-#   db:
-#     driver: local
-#     driver_opts:
-#       type: none
-#       device: /home/timschmi/Desktop/Inception/src/db
-#       o: bind
+volumes:
+  db:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/timschmi/Desktop/Inception/src/db
+      o: bind
 
 networks:
   site-network:
