@@ -3,14 +3,15 @@ version: "3.8"
 services:
 
   mariadb:
-    # env_file: "./.env"
+    env_file:
+      - .env
     build: requirements/mariadb/.
     container_name: mariadb
-    environment:
-      MYSQL_ROOT_PASSWORD: 1234
-      MYSQL_DATABASE: wordpress
-      MYSQL_USER: wordpress
-      MYSQL_PASSWORD: 1234
+    # environment:
+    #   MYSQL_ROOT_PASSWORD: 1234
+    #   MYSQL_DATABASE: wordpress
+    #   MYSQL_USER: wordpress
+    #   MYSQL_PASSWORD: 1234
     ports:
       - "3306:3306"
     volumes:
@@ -20,16 +21,17 @@ services:
     restart: always
 
   wordpress:
-    # env_file: "./.env"
+    env_file:
+      - .env
     build: requirements/wordpress/.
     container_name: wordpress
     depends_on:
       - mariadb
-    environment:
-      WORDPRESS_DB_HOST: mariadb:3306
-      WORDPRESS_DB_USER: wordpress
-      WORDPRESS_DB_PASSWORD: 1234
-      WORDPRESS_DB_NAME: wordpress
+    # environment:
+    #   WORDPRESS_DB_HOST: mariadb:3306
+    #   WORDPRESS_DB_USER: wordpress
+    #   WORDPRESS_DB_PASSWORD: 1234
+    #   WORDPRESS_DB_NAME: wordpress
     ports:
       - "9000:9000"
     volumes:
@@ -39,7 +41,8 @@ services:
     restart: always
 
   nginx:
-    # env_file: "./.env"
+    env_file:
+      - .env
     build: requirements/nginx/.
     container_name: nginx
     depends_on:
@@ -52,13 +55,13 @@ services:
       - site-network
     restart: always
 
-volumes:
-  db:
-    driver: local
-    driver_opts:
-      type: none
-      device: /home/timschmi/Desktop/Inception/src/db
-      o: bind
+# volumes:
+#   db:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       device: /home/timschmi/Desktop/Inception/src/db
+#       o: bind
 
 networks:
   site-network:
