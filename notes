@@ -1,1 +1,2 @@
-docker -a open //for mac
+docker -a open // for mac
+sudo docker system prune -a --volumes // this saved me
