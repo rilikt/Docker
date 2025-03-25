@@ -7,7 +7,7 @@ RUN mkdir -p /var/run/mysqld && chown -R mysql:mysql /var/run/mysqld && chmod -R
 COPY 50-server.cnf .
 COPY db.sh .
 
-EXPOSE 3306
+# EXPOSE 3306
 
 RUN chmod +x db.sh
 CMD ["./db.sh"]

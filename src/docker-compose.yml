@@ -7,15 +7,13 @@ services:
       - .env
     build: requirements/mariadb/.
     container_name: mariadb
-    # environment:
-    #   MYSQL_ROOT_PASSWORD: 1234
-    #   MYSQL_DATABASE: wordpress
-    #   MYSQL_USER: wordpress
-    #   MYSQL_PASSWORD: 1234
     ports:
       - "3306:3306"
     volumes:
       - ./db:/var/lib/mysql
+    secrets:
+      - db_pw
+      - db_root_pw
     networks:
       - site-network
     restart: always
@@ -27,15 +25,14 @@ services:
     container_name: wordpress
     depends_on:
       - mariadb
-    # environment:
-    #   WORDPRESS_DB_HOST: mariadb:3306
-    #   WORDPRESS_DB_USER: wordpress
-    #   WORDPRESS_DB_PASSWORD: 1234
-    #   WORDPRESS_DB_NAME: wordpress
     ports:
       - "9000:9000"
     volumes:
       - ./web:/var/www/html
+    secrets:
+      - wp_ad_pw
+      - wp_usr_pw
+      - db_pw
     networks:
       - site-network
     restart: always
@@ -54,6 +51,17 @@ services:
     networks:
       - site-network
     restart: always
+
+secrets:
+  db_pw:
+    file: secrets/db_pw
+  db_root_pw:
+    file: secrets/db_root_pw
+  wp_ad_pw:
+    file: secrets/wp_ad_pw
+  wp_usr_pw:
+    file: secrets/wp_usr_pw
+  
 
 # volumes:
 #   db:

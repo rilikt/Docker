@@ -13,18 +13,18 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
 fi
 
 echo "starting mariadb"
-mariadbd &
+# mariadbd &
+service mariadb start
 
 while ! mysqladmin ping -h localhost --silent; do
     sleep 3
 done
 echo "mariadb running, configuring next"
 
-#this is redundant and can be removed
-MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+MYSQL_ROOT_PASSWORD=$(cat /run/secrets/db_root_pw)
 MYSQL_DATABASE=${MYSQL_DATABASE}
 MYSQL_USER=${MYSQL_USER}
-MYSQL_PASSWORD=${MYSQL_PASSWORD}
+MYSQL_PASSWORD=$(cat /run/secrets/db_pw)
 
 mysql -u root -p"$MYSQL_ROOT_PASSWORD" <<-EOSQL
 CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE;
@@ -33,6 +33,8 @@ GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%';
 FLUSH PRIVILEGES;
 EOSQL
 
+service mariadb stop
 echo "done"
 
-wait
+# wait
+exec mariadbd
