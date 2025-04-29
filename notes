@@ -1,2 +1,12 @@
 docker -a open // for mac
 sudo docker system prune -a --volumes // this saved me
+
+ToDo:
+- makefile
+- check ssh
+- secrects check
+- volumes check
+- add health check instead of pinging manually
+- setup vm with lubuntu, correct file structure and secrets, also maybe implement copy paste
+- setup url
+- done?

@@ -1,3 +1,20 @@
+
+DOCKER_COMPOSE = docker compose -f ./src/docker-compose.yml
+
+
+all: build up
+
+build:
+	@if [ -z "$$(docker ps -q)" ] ; then \
+		$(DOCKER_COMPOSE) build; \
+	else \
+		echo "Containers already built\n"; \
+	fi 
+
+up:
+	$(DOCKER_COMPOSE) up; \
+
+
 removeall:
 	@if [ -n "$$(docker ps -qa)" ]; then docker stop $$(docker ps -qa); fi
 	@if [ -n "$$(docker ps -qa)" ]; then docker rm $$(docker ps -qa); fi
@@ -8,3 +25,5 @@ removeall:
 clean:
 	docker system prune -a --volumes
 	rm -rf src/web src/db
+
+.PHONY: all build up
