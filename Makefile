@@ -1,14 +1,14 @@
 
-DOCKER_COMPOSE = docker compose -f ./src/docker-compose.yml
-# DOCKER_COMPOSE = docker-compose -f ./src/docker-compose.yml
+#DOCKER_COMPOSE = docker compose -f ./src/docker-compose.yml
+DOCKER_COMPOSE = docker-compose -f ./src/docker-compose.yml
 
 
 all: build up
 
 build:
 	@if [ -z "$$(docker ps -q)" ] ; then \
-		mkdir -p /Users/timschmi/Desktop/Inception/src/db; \
-		mkdir -p /Users/timschmi/Desktop/Inception/src/web; \
+		mkdir -p /home/timschmi/inception/src/db; \
+		mkdir -p /home/timschmi/inception/src/web; \
 		$(DOCKER_COMPOSE) build; \
 	else \
 		echo "Containers already built\n"; \
@@ -32,8 +32,8 @@ removeall:
 
 clean: removeall
 	docker system prune -a --volumes
-	rm -rf /Users/timschmi/Desktop/Inception/src/web/
-	rm -rf /Users/timschmi/Desktop/Inception/src/db/
+	sudo rm -rf /home/timschmi/inception/src/web/
+	sudo rm -rf /home/timschmi/inception/src/db/
 
 # rm -rf src/web src/db
 

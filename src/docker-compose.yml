@@ -68,13 +68,13 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /Users/timschmi/Desktop/Inception/src/db
+      device: /home/timschmi/inception/src/db
       o: bind
   web:
     driver: local
     driver_opts:
       type: none
-      device: /Users/timschmi/Desktop/Inception/src/web
+      device: /home/timschmi/inception/src/web
       o: bind
 
 networks:
