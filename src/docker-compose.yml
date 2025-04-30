@@ -10,7 +10,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./db:/var/lib/mysql
+      - db:/var/lib/mysql
     secrets:
       - db_pw
       - db_root_pw
@@ -28,7 +28,7 @@ services:
     ports:
       - "9000:9000"
     volumes:
-      - ./web:/var/www/html
+      - web:/var/www/html
     secrets:
       - wp_ad_pw
       - wp_usr_pw
@@ -47,7 +47,7 @@ services:
     ports:
       - "443:443"
     volumes:
-      - ./web:/var/www/html
+      - web:/var/www/html
     networks:
       - site-network
     restart: always
@@ -63,13 +63,19 @@ secrets:
     file: secrets/wp_usr_pw
   
 
-# volumes:
-#   db:
-#     driver: local
-#     driver_opts:
-#       type: none
-#       device: /home/timschmi/Desktop/Inception/src/db
-#       o: bind
+volumes:
+  db:
+    driver: local
+    driver_opts:
+      type: none
+      device: /Users/timschmi/Desktop/Inception/src/db
+      o: bind
+  web:
+    driver: local
+    driver_opts:
+      type: none
+      device: /Users/timschmi/Desktop/Inception/src/web
+      o: bind
 
 networks:
   site-network:

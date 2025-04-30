@@ -16,7 +16,7 @@ export WORDPRESS_ADMIN_PASS=$(cat /run/secrets/wp_ad_pw)
 export WORDPRESS_USER_PASS=$(cat /run/secrets/wp_usr_pw)
 
 
-if [ -z "$(ls -A /var/www/html/)" ]; then
+if [ ! -f /var/www/html/wp-config.php ]; then
 	echo "Installing and configuring wordpress."
 	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 	chmod +x wp-cli.phar
