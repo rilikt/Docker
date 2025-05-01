@@ -52,13 +52,13 @@ services:
 
 secrets:
   db_pw:
-    file: home/timschmi/secrets/db_pw
+    file: /home/timschmi/secrets/db_pw
   db_root_pw:
-    file: home/timschmi/secrets/db_root_pw
+    file: /home/timschmi/secrets/db_root_pw
   wp_ad_pw:
-    file: home/timschmi/secrets/wp_ad_pw
+    file: /home/timschmi/secrets/wp_ad_pw
   wp_usr_pw:
-    file: home/timschmi/secrets/wp_usr_pw
+    file: /home/timschmi/secrets/wp_usr_pw
   
 
 volumes:
