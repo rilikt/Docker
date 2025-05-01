@@ -29,9 +29,11 @@ removeall:
 	@if [ -n "$$(docker volume ls -q)" ]; then docker volume rm $$(docker volume ls -q); fi
 	@if [ -n "$$(docker network ls -q)" ]; then docker network rm $$(docker network ls -q) 2>/dev/null || true; fi
 
-fclean: removeall
-	docker system prune -a --volumes
-	sudo rm -rf /home/timschmi/web/
-	sudo rm -rf /home/timschmi/db/
+deletedir:
+	sudo rm -rf /home/timschmi/data/web/
+	sudo rm -rf /home/timschmi/data/db/
 
-.PHONY: all build up down removeall down-v clean createdir
+fclean: removeall deletedir
+	docker system prune -a --volumes
+
+.PHONY: all build up down removeall down-v clean createdir deletedir
