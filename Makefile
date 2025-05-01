@@ -1,6 +1,6 @@
 DOCKER_COMPOSE = docker-compose -f ./src/docker-compose.yml
 
-all: build up
+all: build up createdir
 
 build:
 	@if [ -z "$$(docker ps -q)" ] ; then \
@@ -34,4 +34,4 @@ fclean: removeall
 	sudo rm -rf /home/timschmi/web/
 	sudo rm -rf /home/timschmi/db/
 
-.PHONY: all build up down removeall down-v clean
+.PHONY: all build up down removeall down-v clean createdir
