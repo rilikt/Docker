@@ -1,6 +1,6 @@
 DOCKER_COMPOSE = docker-compose -f ./src/docker-compose.yml
 
-all: build up createdir
+all: createdir build up 
 
 build:
 	@if [ -z "$$(docker ps -q)" ] ; then \
