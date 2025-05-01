@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
 
   mariadb:
@@ -54,13 +52,13 @@ services:
 
 secrets:
   db_pw:
-    file: secrets/db_pw
+    file: home/timschmi/secrets/db_pw
   db_root_pw:
-    file: secrets/db_root_pw
+    file: home/timschmi/secrets/db_root_pw
   wp_ad_pw:
-    file: secrets/wp_ad_pw
+    file: home/timschmi/secrets/wp_ad_pw
   wp_usr_pw:
-    file: secrets/wp_usr_pw
+    file: home/timschmi/secrets/wp_usr_pw
   
 
 volumes:
@@ -68,13 +66,13 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/timschmi/inception/src/db
+      device: /home/timschmi/data/db
       o: bind
   web:
     driver: local
     driver_opts:
       type: none
-      device: /home/timschmi/inception/src/web
+      device: /home/timschmi/data/web
       o: bind
 
 networks:
